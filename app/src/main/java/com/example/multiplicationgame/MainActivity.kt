@@ -51,51 +51,29 @@ fun Greeting(name: String) {
 @Composable
 fun MainCharacter(density: Float, screenHeight: Dp, screenWidth: Dp) {
     val animationDrawable = AnimationDrawable()
-    var kitkus: Bitmap =
-        ContextCompat.getDrawable(LocalContext.current, R.drawable.kitkus_idle_1)?.toBitmap()!!
-    animationDrawable.addFrame(
-        BitmapDrawable(
-            LocalContext.current.resources, Bitmap.createScaledBitmap(
-                kitkus,
-                kitkus.width * (density.toInt() + 1),
-                kitkus.height * (density.toInt() + 1),
-                false
-            )
-        ), 400
+    val kitkusIdleFrame = intArrayOf(
+        R.drawable.kitkus_idle_1,
+        R.drawable.kitkus_idle_2,
+        R.drawable.kitkus_idle_3,
+        R.drawable.kitkus_idle_4
     )
-    kitkus = ContextCompat.getDrawable(LocalContext.current, R.drawable.kitkus_idle_2)?.toBitmap()!!
-    animationDrawable.addFrame(
-        BitmapDrawable(
-            LocalContext.current.resources, Bitmap.createScaledBitmap(
-                kitkus,
-                kitkus.width * (density.toInt() + 1),
-                kitkus.height * (density.toInt() + 1),
-                false
-            )
-        ), 400
-    )
-    kitkus = ContextCompat.getDrawable(LocalContext.current, R.drawable.kitkus_idle_3)?.toBitmap()!!
-    animationDrawable.addFrame(
-        BitmapDrawable(
-            LocalContext.current.resources, Bitmap.createScaledBitmap(
-                kitkus,
-                kitkus.width * (density.toInt() + 1),
-                kitkus.height * (density.toInt() + 1),
-                false
-            )
-        ), 400
-    )
-    kitkus = ContextCompat.getDrawable(LocalContext.current, R.drawable.kitkus_idle_4)?.toBitmap()!!
-    animationDrawable.addFrame(
-        BitmapDrawable(
-            LocalContext.current.resources, Bitmap.createScaledBitmap(
-                kitkus,
-                kitkus.width * (density.toInt() + 1),
-                kitkus.height * (density.toInt() + 1),
-                false
-            )
-        ), 400
-    )
+    val imgWidth = 16;
+    val imgHeight = 16
+    kitkusIdleFrame.forEach { frame ->
+        val kitkus: Bitmap =
+            ContextCompat.getDrawable(LocalContext.current, frame)?.toBitmap()!!
+        animationDrawable.addFrame(
+            BitmapDrawable(
+                LocalContext.current.resources, Bitmap.createScaledBitmap(
+                    kitkus,
+                    imgWidth * (density.toInt() + 1),
+                    imgHeight * (density.toInt() + 1),
+                    false
+                )
+            ), 400
+        )
+    }
+
     Image(
 //        bitmap = Bitmap.createScaledBitmap(
 //            kitkus,
@@ -108,8 +86,8 @@ fun MainCharacter(density: Float, screenHeight: Dp, screenWidth: Dp) {
         contentScale = ContentScale.Fit,
         modifier = Modifier
             .size(
-                (kitkus.width * density).dp,
-                (kitkus.height * density).dp
+                (imgWidth * density).dp,
+                (imgHeight * density).dp
             )
             .absoluteOffset((-screenWidth * 0.45F), 0.dp),
         //filterQuality = FilterQuality.None
