@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.MultiplicationGame" parent="android:Theme.Material.Light.NoActionBar.Fullscreen">
         <item name="android:navigationBarColor">
             @android:color/transparent
@@ -10,5 +11,8 @@
         </item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">
+            shortEdges <!-- default, shortEdges, or never -->
+        </item>
     </style>
 </resources>
